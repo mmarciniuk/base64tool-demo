@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head :: head"></head>
+<body>
+<header th:replace="fragments/header :: header"></header>
+<main role="main" class="flex-shrink-0">
+    <div class="container">
+        <div class="row">
+            <form action="#" th:action="@{/processText}" th:object="${base64Entity}" method="post">
+                <div class="form-group">
+                    <label for="originalPayload">Original payload</label>
+                    <input type="text" th:field="*{originalPayload}" class="form-control" id="originalPayload">
+                </div>
+                <div class="form-group">
+                    <label for="modifiedPayload">Modified payload</label>
+                    <textarea class="form-control" id="modifiedPayload" rows="3"
+                              th:field="*{payload}"></textarea>
+                </div>
+                <input type="submit" name="encode" value="Encode"/>
+                <input type="submit" name="decode" value="Decode"/>
+                <input type="reset"  value="Reset"/>
+            </form>
+        </div>
+    </div>
+</main>
+<footer th:replace="fragments/footer :: footer"></footer>
+</body>
+</html>
