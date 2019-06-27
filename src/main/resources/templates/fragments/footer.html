@@ -1,4 +1,4 @@
-<footer class="footer mt-auto py-3 fixed-bottom bg-dark" xmlns:th="http://www.thymeleaf.org">
+<footer class="footer mt-auto py-3 fixed-bottom bg-light" xmlns:th="http://www.thymeleaf.org">
     <div class="container">
         <span class="text-muted" th:text="'Page generated at ' + ${#dates.format(#dates.createNow(), 'yyyy-MM-dd HH:mm:ss')}"></span>
     </div>
@@ -11,4 +11,5 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
             integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
             crossorigin="anonymous"></script>
+    <script th:src="@{js/clearBase64Form.js}"></script>
 </footer>

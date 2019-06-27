@@ -6,7 +6,7 @@
 <main role="main" class="flex-shrink-0">
     <div class="container">
         <div class="row">
-            <form action="#" th:action="@{/processText}" th:object="${base64Entity}" method="post">
+            <form id="base64FormId" action="#" th:action="@{/processText}" th:object="${base64Entity}" method="post">
                 <div class="form-group">
                     <label for="originalPayload">Original payload</label>
                     <input type="text" th:field="*{originalPayload}" class="form-control" id="originalPayload">
@@ -16,9 +16,10 @@
                     <textarea class="form-control" id="modifiedPayload" rows="3"
                               th:field="*{payload}"></textarea>
                 </div>
-                <input type="submit" name="encode" value="Encode"/>
-                <input type="submit" name="decode" value="Decode"/>
-                <input type="reset"  value="Reset"/>
+                <input class="btn btn-primary" type="submit" name="encode" value="Encode"/>
+                <input class="btn btn-primary" type="submit" name="decode" value="Decode"/>
+                <input class="btn btn-primary" type="reset" value="Reset"/>
+                <input class="btn btn-primary" type="button" onclick="clearForm()" value="Clear form">
             </form>
         </div>
     </div>
