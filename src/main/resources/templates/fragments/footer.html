@@ -1,6 +1,6 @@
 <footer class="footer mt-auto py-3 fixed-bottom bg-light" xmlns:th="http://www.thymeleaf.org">
     <div class="container">
-        <span class="text-muted" th:text="'Page generated at ' + ${#dates.format(#dates.createNow(), 'yyyy-MM-dd HH:mm:ss')}"></span>
+        <span class="text-muted" th:text="'Page generated at ' + ${#dates.format(#dates.createNow(), 'yyyy-MM-dd HH:mm:ss z')}"></span>
     </div>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
             integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
