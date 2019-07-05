@@ -15,9 +15,8 @@ public class Base64Service {
 		byte[] decodePayloadInBytes = Base64.getDecoder().decode(payloadToDecode.getBytes());
 
 		Base64Entity base64Entity = new Base64Entity();
-		base64Entity.setStatus(Base64Entity.Status.DECODED);
-		base64Entity.setOriginalPayload(payloadToDecode);
-		base64Entity.setPayload(new String(decodePayloadInBytes));
+		base64Entity.setEncodedPayload(payloadToDecode);
+		base64Entity.setDecodedPayload(new String(decodePayloadInBytes));
 
 		Response response = new Response();
 		response.setBody(base64Entity);
@@ -29,9 +28,8 @@ public class Base64Service {
 		String encodedPayload = Base64.getEncoder().encodeToString(payloadToEncode.getBytes());
 
 		Base64Entity base64Entity = new Base64Entity();
-		base64Entity.setStatus(Base64Entity.Status.ENCODED);
-		base64Entity.setOriginalPayload(payloadToEncode);
-		base64Entity.setPayload(encodedPayload);
+		base64Entity.setDecodedPayload(payloadToEncode);
+		base64Entity.setEncodedPayload(encodedPayload);
 
 		Response response = new Response();
 		response.setBody(base64Entity);
@@ -43,9 +41,8 @@ public class Base64Service {
 		String encodedPayloadOfFile = Base64.getEncoder().encodeToString(multipartFile.getBytes());
 
 		Base64Entity base64Entity = new Base64Entity();
-		base64Entity.setStatus(Base64Entity.Status.ENCODED);
-		base64Entity.setOriginalPayload(multipartFile.getOriginalFilename());
-		base64Entity.setPayload(encodedPayloadOfFile);
+		base64Entity.setDecodedPayload(multipartFile.getOriginalFilename());
+		base64Entity.setEncodedPayload(encodedPayloadOfFile);
 
 		Response response = new Response();
 		response.setBody(base64Entity);

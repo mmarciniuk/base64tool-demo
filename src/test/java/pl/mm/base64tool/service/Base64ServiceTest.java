@@ -6,14 +6,15 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.core.io.ClassPathResource;
-import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.web.multipart.MultipartFile;
 import pl.mm.base64tool.entity.Base64Entity;
 import pl.mm.base64tool.entity.requestResponse.Response;
 
-import java.io.*;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 
 @RunWith(MockitoJUnitRunner.class)
 public class Base64ServiceTest {
@@ -27,18 +28,17 @@ public class Base64ServiceTest {
 		String encodedText = "YmFzaWNUZXN0";
 
 		Base64Entity base64EntityExpected = new Base64Entity();
-		base64EntityExpected.setOriginalPayload(textToEncode);
-		base64EntityExpected.setStatus(Base64Entity.Status.ENCODED);
-		base64EntityExpected.setPayload(encodedText);
+		base64EntityExpected.setDecodedPayload(textToEncode);
+		base64EntityExpected.setEncodedPayload(encodedText);
 
-		Response expectedRespone = new Response();
-		expectedRespone.setHeader(null);
-		expectedRespone.setBody(base64EntityExpected);
-		expectedRespone.setError(null);
+		Response expectedResponse = new Response();
+		expectedResponse.setHeader(null);
+		expectedResponse.setBody(base64EntityExpected);
+		expectedResponse.setError(null);
 
 		Response response = base64Service.encode(textToEncode);
 
-		Assert.assertEquals(expectedRespone, response);
+		Assert.assertEquals(expectedResponse, response);
 	}
 
 	@Test
@@ -47,9 +47,8 @@ public class Base64ServiceTest {
 		String decodedText = "basicTest";
 
 		Base64Entity base64EntityExpected = new Base64Entity();
-		base64EntityExpected.setOriginalPayload(textToDecode);
-		base64EntityExpected.setStatus(Base64Entity.Status.DECODED);
-		base64EntityExpected.setPayload(decodedText);
+		base64EntityExpected.setEncodedPayload(textToDecode);
+		base64EntityExpected.setDecodedPayload(decodedText);
 
 		Response expectedResponse = new Response();
 		expectedResponse.setHeader(null);
@@ -70,9 +69,8 @@ public class Base64ServiceTest {
 		MultipartFile multipartFileToEncode = new MockMultipartFile(resource.getFile().getName(), inputStream);
 
 		Base64Entity base64EntityExpected = new Base64Entity();
-		base64EntityExpected.setOriginalPayload(multipartFileToEncode.getOriginalFilename());
-		base64EntityExpected.setStatus(Base64Entity.Status.ENCODED);
-		base64EntityExpected.setPayload(encodedText);
+		base64EntityExpected.setDecodedPayload(multipartFileToEncode.getOriginalFilename());
+		base64EntityExpected.setEncodedPayload(encodedText);
 
 		Response expectedResponse = new Response();
 		expectedResponse.setHeader(null);

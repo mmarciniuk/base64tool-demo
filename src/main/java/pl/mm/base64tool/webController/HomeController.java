@@ -8,7 +8,7 @@ import pl.mm.base64tool.entity.Base64Entity;
 import pl.mm.base64tool.entity.requestResponse.Response;
 import pl.mm.base64tool.service.Base64Service;
 
-@SuppressWarnings("SameReturnValue")
+@SuppressWarnings({"SameReturnValue", "WeakerAccess"})
 @Controller
 @RequestMapping(HomeController.Mappings.BASE)
 public class HomeController {
@@ -32,7 +32,7 @@ public class HomeController {
 
 	@PostMapping(value = Mappings.PROCESS, params = "encode")
 	public String encode(@ModelAttribute("base64Entity") Base64Entity base64Entity, Model model){
-		Response response = base64Service.encode(base64Entity.getOriginalPayload());
+		Response response = base64Service.encode(base64Entity.getDecodedPayload());
 
 		model.addAttribute("base64Entity", response.getBody());
 
@@ -41,7 +41,7 @@ public class HomeController {
 
 	@PostMapping(value = Mappings.PROCESS, params = "decode")
 	public String decode(@ModelAttribute("base64Entity") Base64Entity base64Entity, Model model){
-		Response response = base64Service.decode(base64Entity.getOriginalPayload());
+		Response response = base64Service.decode(base64Entity.getEncodedPayload());
 
 		model.addAttribute("base64Entity", response.getBody());
 

@@ -1,16 +1,13 @@
 package pl.mm.base64tool.entity;
 
 import lombok.Data;
+import org.springframework.stereotype.Component;
 
 @Data
+@Component
 public class Base64Entity {
 
-	public enum Status {
-		DECODED, ENCODED
-	}
-
-	private Status status;
-	private String originalPayload;
-	private String payload;
+	private String decodedPayload;
+	private String encodedPayload;
 
 }
