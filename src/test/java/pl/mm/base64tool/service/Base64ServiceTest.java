@@ -5,8 +5,15 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.junit.MockitoJUnitRunner;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.core.io.Resource;
+import org.springframework.mock.web.MockMultipartFile;
+import org.springframework.web.multipart.MultipartFile;
 import pl.mm.base64tool.entity.Base64Entity;
 import pl.mm.base64tool.entity.requestResponse.Response;
+
+import java.io.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class Base64ServiceTest {
@@ -50,6 +57,29 @@ public class Base64ServiceTest {
 		expectedResponse.setError(null);
 
 		Response response = base64Service.decode(textToDecode);
+
+		Assert.assertEquals(expectedResponse, response);
+	}
+
+	@Test
+	public void encodeFileTest() throws IOException {
+		String encodedText = "VGhpcyBpcyB0ZXN0IGZpbGUu";
+
+		Resource resource = new ClassPathResource("fileForEncodeFileTest.txt");
+		InputStream inputStream = new FileInputStream(resource.getFile());
+		MultipartFile multipartFileToEncode = new MockMultipartFile(resource.getFile().getName(), inputStream);
+
+		Base64Entity base64EntityExpected = new Base64Entity();
+		base64EntityExpected.setOriginalPayload(multipartFileToEncode.getOriginalFilename());
+		base64EntityExpected.setStatus(Base64Entity.Status.ENCODED);
+		base64EntityExpected.setPayload(encodedText);
+
+		Response expectedResponse = new Response();
+		expectedResponse.setHeader(null);
+		expectedResponse.setBody(base64EntityExpected);
+		expectedResponse.setError(null);
+
+		Response response = base64Service.encodeFile(multipartFileToEncode);
 
 		Assert.assertEquals(expectedResponse, response);
 	}
