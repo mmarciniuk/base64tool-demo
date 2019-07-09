@@ -42,17 +42,19 @@ public class Base64ControllerTest {
 		expectedResponse.setError(null);
 
 		String pathParameter = "?payloadToEncode=" + textToEncode;
-		String expectedJsonResponse = "{\"header\":null,\"body\":{\"decodedPayload\":\"basicTest\",\"encodedPayload\":\"YmFzaWNUZXN0\"},\"error\":null}";
 
 		Mockito.doReturn(expectedResponse).when(base64Service).encode(textToEncode);
 
 		this.mockMvc.perform(get(Base64Controller.Mappings.BASE + Base64Controller.Mappings.ENCODE + pathParameter))
 				.andExpect(status().isOk())
-				.andExpect(MockMvcResultMatchers.jsonPath("*", Matchers.is(expectedJsonResponse)));
+				.andExpect(MockMvcResultMatchers.jsonPath("$.header", Matchers.is(expectedResponse.getHeader())))
+				.andExpect(MockMvcResultMatchers.jsonPath("$.body.decodedPayload", Matchers.is(base64EntityExpected.getDecodedPayload())))
+				.andExpect(MockMvcResultMatchers.jsonPath("$.body.encodedPayload", Matchers.is(base64EntityExpected.getEncodedPayload())))
+				.andExpect(MockMvcResultMatchers.jsonPath("$.error", Matchers.is(expectedResponse.getError())));
 	}
 
 	@Test
-	public void decode() {
+	public void decode() throws Exception {
 		String textToDecode = "YmFzaWNUZXN0";
 		String decodedText = "basicTest";
 
@@ -65,6 +67,15 @@ public class Base64ControllerTest {
 		expectedResponse.setBody(base64EntityExpected);
 		expectedResponse.setError(null);
 
+		String pathParameter = "?payloadToDecode=" + textToDecode;
 
+		Mockito.doReturn(expectedResponse).when(base64Service).decode(textToDecode);
+
+		this.mockMvc.perform(get(Base64Controller.Mappings.BASE+ Base64Controller.Mappings.DECODE+pathParameter))
+				.andExpect(status().isOk())
+				.andExpect(MockMvcResultMatchers.jsonPath("$.header", Matchers.is(expectedResponse.getHeader())))
+				.andExpect(MockMvcResultMatchers.jsonPath("$.body.decodedPayload", Matchers.is(base64EntityExpected.getDecodedPayload())))
+				.andExpect(MockMvcResultMatchers.jsonPath("$.body.encodedPayload", Matchers.is(base64EntityExpected.getEncodedPayload())))
+				.andExpect(MockMvcResultMatchers.jsonPath("$.error", Matchers.is(expectedResponse.getError())));
 	}
 }
