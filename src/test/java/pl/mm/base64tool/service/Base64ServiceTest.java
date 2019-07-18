@@ -2,13 +2,12 @@ package pl.mm.base64tool.service;
 
 import org.junit.Assert;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
-import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.web.multipart.MultipartFile;
+import pl.mm.base64tool.BaseTest;
 import pl.mm.base64tool.entity.Base64Entity;
 import pl.mm.base64tool.entity.requestResponse.Response;
 
@@ -16,8 +15,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-@RunWith(MockitoJUnitRunner.class)
-public class Base64ServiceTest {
+public class Base64ServiceTest extends BaseTest {
 
 	@InjectMocks
 	private Base64Service base64Service;
