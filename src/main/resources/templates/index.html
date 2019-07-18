@@ -4,49 +4,78 @@
 <body>
 <header th:replace="fragments/header :: header"></header>
 <main role="main" class="flex-shrink-0">
-	<div class="container mx-auto">
-		<div class="row">
-			<form id="base64FormId" action="#" th:action="@{/processText}" th:object="${base64Entity}" method="post"
-				  class="border">
-				<div class="container" style="padding: 10px;">
-					<div class="row justify-content-center">
-						<div class="col">
-							<div class="form-group">
-								<label for="originalPayload">Payload to encode</label>
-								<textarea th:field="*{decodedPayload}" class="form-control shadow" rows="5" cols="50"
-										  id="originalPayload"></textarea>
-							</div>
-						</div>
-						<div class="col">
-							<div class="row p-1">
-								<input class="btn btn-primary mx-auto shadow" type="submit" name="encode"
-									   value="Encode ->"/>
-							</div>
-							<div class="row p-1">
-								<input class="btn btn-primary mx-auto shadow" type="submit" name="decode"
-									   value="<- Decode"/>
-							</div>
-							<div class="row p-1">
-								<input class="btn btn-primary mx-auto shadow" type="reset" value="Reset"/>
-							</div>
-							<div class="row p-1">
-								<input class="btn btn-primary mx-auto shadow" type="button"
-									   onclick="clearForm('base64FormId')"
-									   value="Clear form">
-							</div>
-						</div>
-						<div class="col">
-							<div class="form-group">
-								<label for="modifiedPayload">Payload to decode</label>
-								<textarea class="form-control shadow" id="modifiedPayload" rows="5" cols="50"
-										  th:field="*{encodedPayload}"></textarea>
-							</div>
-						</div>
-					</div>
-				</div>
-			</form>
-		</div>
-	</div>
+    <div class="container">
+        <div class="row">
+            <form id="base64FormId" action="#" th:action="@{/processText}" th:object="${base64Entity}" method="post"
+                  class="form-group">
+                <div class="container" style="padding: 10px;">
+                    <div class="row justify-content-center">
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="originalPayload">Payload to encode</label>
+                                <textarea th:field="*{decodedPayload}" class="form-control shadow" rows="5" cols="50"
+                                          id="originalPayload"></textarea>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="row p-1">
+                                <input class="btn btn-primary mx-auto shadow" type="submit" name="encode"
+                                       value="Encode ->"/>
+                            </div>
+                            <div class="row p-1">
+                                <input class="btn btn-primary mx-auto shadow" type="submit" name="decode"
+                                       value="<- Decode"/>
+                            </div>
+                            <div class="row p-1">
+                                <input class="btn btn-primary mx-auto shadow" type="reset" value="Reset"/>
+                            </div>
+                            <div class="row p-1">
+                                <input class="btn btn-primary mx-auto shadow" type="button"
+                                       onclick="clearForm('base64FormId')"
+                                       value="Clear form">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="modifiedPayload">Payload to decode</label>
+                                <textarea class="form-control shadow" id="modifiedPayload" rows="5" cols="50"
+                                          th:field="*{encodedPayload}"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <hr>
+        <div class="row">
+            <form id="base64FormFileId" action="#" th:action="@{/uploadFileToEncode}" th:object="${base64EntityFile}"
+                  method="post" enctype="multipart/form-data" class="form-group">
+                <div class="container" style="padding: 10px;">
+                    <div class="row justify-content-center">
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="originalPayloadFile">File to encode</label>
+                                <input id="originalPayloadFile" class="form-control-file" type="file" name="file">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="encodeFile">Encoded file</label>
+                                <textarea class="form-control shadow" id="encodeFile" rows="5" cols="50"
+                                          th:field="*{encodedPayload}"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class="col">
+                            <input class="btn btn-primary mx-auto shadow" type="submit" name="uploadFileToEncode"
+                                   value="Upload file to encode">
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
 </main>
 <footer th:replace="fragments/footer :: footer"></footer>
 </body>

@@ -2,14 +2,13 @@ package pl.mm.base64tool.restController;
 
 import org.hamcrest.Matchers;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+import pl.mm.base64tool.BaseTest;
 import pl.mm.base64tool.entity.Base64Entity;
 import pl.mm.base64tool.entity.requestResponse.Response;
 import pl.mm.base64tool.service.Base64Service;
@@ -17,9 +16,8 @@ import pl.mm.base64tool.service.Base64Service;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@RunWith(SpringRunner.class)
 @WebMvcTest
-public class Base64ControllerTest {
+public class Base64ControllerTest extends BaseTest {
 
 	@Autowired
 	private MockMvc mockMvc;
