@@ -22,10 +22,12 @@
          
     	<distributionManagement>
 		<repository>
+			<id>local-artifactory</id>
 			<name>RELEASE</name>
 			<url>http://172.18.0.2:8081/artifactory/libs-release-local</url>
 		</repository>
 		<snapshotRepository>
+			<id>local-artifactory</id>
 			<name>SNAPSHOT</name>
 			<url>http://172.18.0.2:8081/artifactory/libs-snapshot-local</url>
 		</snapshotRepository>
